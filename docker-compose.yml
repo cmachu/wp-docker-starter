@@ -1,0 +1,34 @@
+version: '2'
+services:
+  landing:
+    build: .
+    ports:
+      - 8080:80
+      - 4430:443
+    volumes:
+      - ./app:/app/
+    environment:
+      - VIRTUAL_HOST=landing.localhost,*.landing.localhost
+  db:
+    image: mysql:5.7
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 22222:80
+    environment:
+      - VIRTUAL_HOST=phpmyadmin.localhost
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
+volumes:
+  data:
