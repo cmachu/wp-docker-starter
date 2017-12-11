@@ -1,5 +1,8 @@
 #!/bin/bash
 
-echo "Start docker... ";
+echo "Start project...";
 sudo service apache2 stop
-docker-compose up
+
+./bin/docker/start-quiet.sh
+
+./bin/frontend.sh $1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd app/wp-content/themes/mokka
+cd app/wp-content/themes/$1
 
 echo "Install composer..."
 composer install

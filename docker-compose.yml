@@ -1,6 +1,6 @@
 version: '2'
 services:
-  landing:
+  web:
     build: .
     ports:
       - 8080:80
@@ -13,6 +13,7 @@ services:
     image: mysql:5.7
     volumes:
       - data:/var/lib/mysql
+      - ./db_dumps:/db_dumps/
     environment:
       MYSQL_ROOT_PASSWORD: root
   phpmyadmin:
