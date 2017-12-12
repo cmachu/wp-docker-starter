@@ -14,7 +14,10 @@ You can also work with your Wordpress using WP-CLi and automated front-end runne
 4. Run your project using `./wordpress.sh run` command on your terminal
 
 ## Default configuration
-
+- By default, you can find your Wordpress project on `http://wordpress.localhost/`.
+- You can login into Wordpress admin panel using `root/root` login and password on page `http://wordpress.localhost/wp-admin`
+- You can access PhpMyAdmin on URL `http://phpmyadmin.localhost/` and login into using `root/root` user and password.
+- By default, project is configured for multisite - you can access sub pages on subdomains, example `http://example.wordpress.localhost`. No extra pages on multisite are configured by default.
 
 ## Up and down your project
 ### Start project
