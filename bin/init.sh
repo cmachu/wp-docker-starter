@@ -2,10 +2,13 @@
 
 echo "Install Wordpress...";
 
+sudo chown -R $1:$2 app/
+sudo chmod -R 755 app/
+
 sudo service apache2 stop
 docker-compose up -d
 
-#docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
+docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
 docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'CREATE DATABASE $8'";
 
 docker-compose exec web sh -c "exec wp --allow-root core download";
@@ -14,8 +17,8 @@ docker-compose exec web sh -c "exec wp --allow-root core multisite-install --adm
 
 
 docker-compose exec web sh -c "exec mkdir /app/wp-content/uploads"
-docker-compose exec web sh -c "exec chmod -R 777 /app/wp-content/uploads"
-docker-compose exec web sh -c "exec chown -R www-data:www-data /app/wp-content/uploads"
+docker-compose exec web sh -c "exec chmod -R 777 /app"
+docker-compose exec web sh -c "exec chown -R www-data:www-data /app"
 
 sudo chown -R $1:$2 app/
 

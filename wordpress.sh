@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BASH_GROUP='root'
-BASH_USER='root'
+BASH_GROUP='pawel'
+BASH_USER='pawel'
 
 WP_USER='root'
 WP_PASS='root'
