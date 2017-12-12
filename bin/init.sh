@@ -6,6 +6,11 @@ sudo chown -R $1:$2 app/
 sudo chmod -R 755 app/
 
 sudo service apache2 stop
+
+docker-compose build
+
+echo "Waiting for docker run..."
+sleep 2
 docker-compose up -d
 
 echo "Waiting for docker setup..."
