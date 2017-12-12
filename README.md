@@ -18,11 +18,19 @@ You can also work with your Wordpress using WP-CLi and automated front-end runne
 - You can login into Wordpress admin panel using `root/root` login and password on page `http://wordpress.localhost/wp-admin`
 - You can access PhpMyAdmin on URL `http://phpmyadmin.localhost/` and login into using `root/root` user and password.
 - By default, project is configured for multisite - you can access sub pages on subdomains, example `http://example.wordpress.localhost`. No extra pages on multisite are configured by default.
+- Front-end processor has disabled all features by default. You need to configure `/bin/frontend.sh` for your project. You can add every front-end(npm, Webpack, Bower, Gulp, Grunt) and back-end(Composer) tool - to this script.
 
-## Up and down your project
+## Setup
+
+## Up and down your project to live
 ### Start project
+You can start your Wordpress project by few ways:
+- You can run full-stack runner(Docker + front-end tools + watchers) using `./wordpress.sh run` command on your terminal. Please remember to add valid theme folder on `wordpress.sh` config area, and to setup valid front-end workflow on `/bin/frontend.sh`.
+- You can run Docker containers using `./wordpress.sh docker start`
+- You can run only front-end tools and watchers using `./wordpress.sh frontend`
 
 ### Stop project
+- When Dockers containers run on background, you can stop them using `./wordpress.sh docker stop` command on terminal.
 
 
 ## Setup
