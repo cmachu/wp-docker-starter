@@ -14,9 +14,9 @@ sleep 2
 docker-compose up -d
 
 echo "Waiting for docker setup..."
-sleep 5
+sleep 10
 
-docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
+#docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
 docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'CREATE DATABASE $8'";
 
 docker-compose exec web sh -c "exec wp --allow-root core download";
