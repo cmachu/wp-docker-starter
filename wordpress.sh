@@ -5,8 +5,8 @@ BASH_USER='pawel'
 
 WP_USER='root'
 WP_PASS='root'
-WP_URL='http://wordpress.localhost/'
 WP_EMAIL='root@wordpress.localhost'
+WP_URL='http://wordpress.localhost/'
 WP_TITLE='Sample website'
 WP_THEME='twentyseventeen'
 
