@@ -26,6 +26,9 @@ case $1 in
     run)
         ./bin/run.sh $WP_THEME
         ;;
+    wp-cli)
+        ./bin/wp-cli.sh $1 $2 $3 $4 $5
+        ;;
     db)
         case $2 in
             import)
