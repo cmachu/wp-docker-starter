@@ -1,23 +1,11 @@
 #!/bin/bash
 
 echo "Install Wordpress...";
-#1:$BASH_USER
-#2:$BASH_GROUP
-#3:$WP_USER
-#4:$WP_PASS
-#5:$WP_EMAIL
-#6:$WP_URL
-#7:$WP_TITLE
-#8:$DB_NAME
-#9:$DB_USER
-#10:$DB_PASS
-#11:$DB_HOST
-
 
 sudo service apache2 stop
 docker-compose up -d
 
-docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
+#docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
 docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'CREATE DATABASE $8'";
 
 docker-compose exec web sh -c "exec wp --allow-root core download";
