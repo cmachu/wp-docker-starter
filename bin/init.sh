@@ -8,6 +8,9 @@ sudo chmod -R 755 app/
 sudo service apache2 stop
 docker-compose up -d
 
+echo "Waiting for docker setup..."
+sleep 5
+
 docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'DROP DATABASE $8'";
 docker-compose exec db sh -c "exec mysql -u $9 -p${10} -e 'CREATE DATABASE $8'";
 
