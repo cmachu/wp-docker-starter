@@ -75,6 +75,7 @@ Our boilerplate determine some kind of workflow. Projects using this boilerplate
 
 - `./wp.sh docker start` - Start Docker containers
 - `./wp.sh docker stop` - Stop all Docker containers
+- `./wp.sh docker privi` - Re-attach chmods and ownership inside docker and system for Wordpress.
 
 - `./wp.sh db import <filename:optional - default: last exported file>` - Import database dump from last exported file or from specified file name. Database dumps are located on `db_dumps` directory.
 - `./wp.sh db export` - Export database
@@ -83,3 +84,4 @@ Our boilerplate determine some kind of workflow. Projects using this boilerplate
 - `./wp.sh frontend` - Run front-end and backend tools.
 - `./wp.sh run` - Run project.
 - `./wp.sh wp-cli <wp-cli commands>` - Use WP-CLI inside Docker container.
+
