@@ -47,6 +47,9 @@ case $1 in
             start-quiet)
                 ./bin/docker/start-quiet.sh
                 ;;
+            privi)
+                ./bin/docker/privi.sh $BASH_USER $BASH_GROUP
+                ;;
             stop)
                 ./bin/docker/stop.sh
                 ;;

@@ -16,6 +16,8 @@ services:
       - ./db_dumps:/db_dumps/
     environment:
       MYSQL_ROOT_PASSWORD: root
+    command:
+      --disable-partition-engine-check
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
