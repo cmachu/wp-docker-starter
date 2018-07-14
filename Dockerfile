@@ -8,7 +8,7 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         less \
-        libpng12-dev \
+        libpng-dev \
         libjpeg-dev \
         libxml2-dev \
         mariadb-client \
