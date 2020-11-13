@@ -1,39 +1,40 @@
-FROM php:7.0-apache
+FROM php:7.4-apache
 ENV TERM=xterm
-LABEL maintainer="Derek P Sifford <dereksifford@gmail.com>" \
-      version="0.15.2-php7.0"
+LABEL maintainer="Pawel Cmachowski<pawel.cmachowski@gmail.com>" \
+      version="wp-docker-starter--7.4"
 
 # Install base requirements & sensible defaults + required PHP extensions
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
-    && apt-get update \
+RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         less \
         libpng-dev \
         libjpeg-dev \
         libxml2-dev \
         mariadb-client \
-        unzip \
         sudo \
         vim \
-        zip \
-    && DEBIAN_FRONTEND=noninteractive apt-get -t jessie-backports install -y \
+        git \
         python-certbot-apache \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+    && docker-php-ext-configure gd --with-jpeg=/usr \
     && docker-php-ext-install \
         exif \
         gd \
         mysqli \
         opcache \
-        soap \
-        zip \
-    # See https://secure.php.net/manual/en/opcache.installation.php
-    && echo 'memory_limit = 512M' > /usr/local/etc/php/php.ini \
+        soap
+
+RUN apt-get update \
+    && apt-get install -y  libzip-dev zip unzip \
+    && docker-php-ext-install zip
+
+RUN echo 'memory_limit = 8000M' > /usr/local/etc/php/php.ini \
     && { \
-        echo 'opcache.memory_consumption=128'; \
-        echo 'opcache.interned_strings_buffer=8'; \
-        echo 'opcache.max_accelerated_files=4000'; \
-        echo 'opcache.revalidate_freq=2'; \
+        echo 'opcache.enable=1'; \
+        echo 'opcache.revalidate_freq=0'; \
+        echo 'opcache.memory_consumption=512'; \
+        echo 'opcache.interned_strings_buffer=16'; \
+        echo 'opcache.max_accelerated_files=10000'; \
         echo 'opcache.fast_shutdown=1'; \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
@@ -47,10 +48,23 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf 
     && rm -fr /var/www/html \
     && ln -s /app /var/www/html
 
-
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && sudo mv wp-cli.phar /usr/local/bin/wp
+
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php \
+ && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+RUN sudo rm -rf /var/lib/apt/lists/* && apt-get update
+RUN apt-get install rsync gnupg sshpass -y
+
+RUN apt-get update \
+    && curl -sL https://deb.nodesource.com/setup_11.x | bash \
+    && apt-get install nodejs -yq \
+    && npm install gulp -g \
+    && npm install bower -g
+
+RUN a2enmod ssl
 
 WORKDIR /app
 EXPOSE 80 443

@@ -6,26 +6,33 @@ services:
       - 8080:80
       - 4430:443
     volumes:
-      - ./app:/app/
+      - ./app:/app:cached
     environment:
       - VIRTUAL_HOST=wordpress.localhost,*.wordpress.localhost
   db:
     image: mysql:5.7
     volumes:
-      - data:/var/lib/mysql
+      - data:/var/lib/mysql:delegated
       - ./db_dumps:/db_dumps/
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=wordpress
     command:
       --disable-partition-engine-check
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      - MYSQL_ROOT_PASSWORD=root
+      - VIRTUAL_HOST=phpmyadmin.localhost
     ports:
       - 22222:80
+  mail:
+    image: schickling/mailcatcher
+    ports:
+      - 1025:1025
+      - 1080:80
     environment:
-      - VIRTUAL_HOST=phpmyadmin.localhost
+      - VIRTUAL_HOST=mail.localhost
   nginx-proxy:
     image: jwilder/nginx-proxy
     ports:
