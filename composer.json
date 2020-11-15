@@ -1,0 +1,12 @@
+{
+    "name": "cmachu/wp-docker-starter",
+    "description": "Wordpress Docker starter",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Paweł Ćmachowski",
+            "email": "pawel.cmachowski@gmail.com"
+        }
+    ],
+    "require": {}
+}
